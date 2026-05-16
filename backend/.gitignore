@@ -1,0 +1,27 @@
+# Entornos virtuales
+venv/
+
+# Variables de entorno
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.pyc
+
+# Base de datos
+db.sqlite3
+
+# Archivos de usuario / media
+uploads/
+
+# Archivos estáticos generados
+assets/
+
+# Logs
+*.log
+
+# Sistema / editor
+.vscode/
+.DS_Store
