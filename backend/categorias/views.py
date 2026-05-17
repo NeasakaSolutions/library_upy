@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from django.http.response import JsonResponse
 from django.utils.text import slugify
+from seguridad.decorators import logueado
 from http import HTTPStatus
 from categorias.models import Categoria
 from libros.models import Libro
@@ -21,6 +22,7 @@ class CategoriasLista(APIView):
         }, status = HTTPStatus.OK)
 
     # Crear categorias:
+    @logueado()
     def post(self, request):
 
         # Variables:
@@ -69,7 +71,8 @@ class CategoriaDetalle(APIView):
                 "mensaje": "Ocurrio un error"
             }, status = HTTPStatus.BAD_REQUEST)
         
-    # Editar categoria:    
+    # Editar categoria:
+    @logueado()    
     def put(self, request, id):
 
         # Variables:
@@ -106,6 +109,7 @@ class CategoriaDetalle(APIView):
             }, status = HTTPStatus.NOT_FOUND)
 
     # Eliminar categoria:
+    @logueado()
     def delete(self, request, id):
 
         # Validar que exista la categoria:

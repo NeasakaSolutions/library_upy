@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from http import HTTPStatus
 from utilidades.utilidades import paginar
+from seguridad.decorators import logueado
 from categorias.models import Categoria
 from libros.models import Libro
 from categorias.serializers import CategoriaSerializer
@@ -40,6 +41,7 @@ class LibrosLista(APIView):
         })
     
     # Agregar registro:
+    @logueado()
     def post(self, request):
 
         # Variables:
@@ -191,6 +193,7 @@ class LibroDetalle(APIView):
             }, status = HTTPStatus.NOT_FOUND)
     
     # Modificar libro:
+    @logueado()
     def put(self, request, id):
         
         # Validar que el libro a modificar exista:
@@ -265,6 +268,7 @@ class LibroDetalle(APIView):
             }, status=HTTPStatus.INTERNAL_SERVER_ERROR)
         
     # Eliminar libro:
+    @logueado()
     def delete(self, request, id):
 
         try:

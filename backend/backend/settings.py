@@ -19,7 +19,10 @@ else:
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2gj3fr-p@2^nh(m3&ri62i^u))u_$(68b!u2*=kgb&4*$__5y2'
+SECRET_KEY = os.getenv("SECRET_KEY")
+
+if not SECRET_KEY:
+    raise Exception("SECRET_KEY no configurada")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'categorias',
     'libros',
+    'seguridad',
 ]
 
 MIDDLEWARE = [
