@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/v1/', include('categorias.urls')),
     path('api/v1/', include('libros.urls')),
     path('api/v1/', include('seguridad.urls')),
+    path('api/v1/', include('libros_helper.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root =  settings.MEDIA_ROOT)

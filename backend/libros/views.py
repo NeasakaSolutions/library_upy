@@ -15,6 +15,8 @@ from categorias.models import Categoria
 from libros.models import Libro
 from categorias.serializers import CategoriaSerializer
 from libros.serializers import LibroSerializer
+from django.conf import settings
+from jose import jwt
 
 # Metodos sin argumento.
 class LibrosLista(APIView):
@@ -138,6 +140,9 @@ class LibrosLista(APIView):
                 "mensaje": "Error al subir el libro"
             }, status=HTTPStatus.BAD_REQUEST)
         
+        header = request.headers.get('Authorization').split(" ")
+        resuelto = jwt.decode(header[1], settings.SECRET_KEY, algorithms = ['HS512'])
+
         # Crear registro:
         try:
             Libro.objects.create(
@@ -147,7 +152,8 @@ class LibrosLista(APIView):
                 categoria = categoria,
                 fecha = timezone.now(),
                 foto = foto,
-                libro = libro
+                libro = libro,
+                user_id = resuelto["id"]
             )
 
             return JsonResponse({
@@ -165,7 +171,7 @@ class LibrosLista(APIView):
 class LibroDetalle(APIView):
     
     # Consultar un libro:
-    def get(self, request, id):
+    def get(self, request, id, slug):
         
         try:
             libro = Libro.objects.get(id = id)
@@ -181,8 +187,8 @@ class LibroDetalle(APIView):
                     "categoria": libro.categoria.nombre,
                     "imagen": f"{os.getenv("BASE_URL")}uploads/fotos/{libro.foto}",
                     "libro": f"{os.getenv("BASE_URL")}uploads/libros/{libro.libro}",
-                    #"user_id": data.user_id,
-                    #"user": data.user.first_name
+                    "user_id": libro.user_id,
+                    "user": libro.user.first_name
                     }
             }, status = HTTPStatus.OK)
 
