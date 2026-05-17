@@ -21,11 +21,11 @@ class LibroSerializer(serializers.ModelSerializer):
 
     # Formateo de la imagen:
     def get_imagen(self, obj):
-        return f"{os.getenv("BASE_URL")}uploads/libros/{obj.foto}"
+        return f"{os.getenv('BASE_URL')}uploads/fotos/{obj.foto}"
 
     # Formateo de la cancion:
     def get_libro(self, obj):
-        return f"{os.getenv("BASE_URL")}uploads/libros/{obj.libro}"
+        return f"{os.getenv('BASE_URL')}uploads/libros/{obj.libro}"
     
 
 

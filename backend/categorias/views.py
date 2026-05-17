@@ -5,6 +5,7 @@ from django.http.response import JsonResponse
 from django.utils.text import slugify
 from http import HTTPStatus
 from categorias.models import Categoria
+from libros.models import Libro
 from categorias.serializers import CategoriaSerializer
 
 # Clases sin argumentos:
@@ -107,22 +108,31 @@ class CategoriaDetalle(APIView):
     # Eliminar categoria:
     def delete(self, request, id):
 
-        # Eliminar registro:
+        # Validar que exista la categoria:
         try:
             # Consulta:
             categoria = Categoria.objects.get(id = id)
-
-            # Eliminar regsitro:
-            categoria.delete()
-
-            return JsonResponse({
-                "estado": "ok",
-                "mensaje": "Se elimino el registro"
-            }, status = HTTPStatus.OK)
         
         except Categoria.DoesNotExist:
             return JsonResponse({
                 "estado": "error",
                 "mensaje": "Ocurrio un error"
             }, status = HTTPStatus.NOT_FOUND)
+        
+        # Relacion entre categoria y libro:
+        if Libro.objects.filter(categoria_id = id).exists():
+            return JsonResponse({
+                "estado": "error",
+                "mensaje": "Ocurrio un error inesperado"
+            }, status = HTTPStatus.BAD_REQUEST)
+
+        # Eliminar regsitro:
+        categoria.delete()
+
+        return JsonResponse({
+            "estado": "ok",
+            "mensaje": "Se elimino el registro"
+        }, status = HTTPStatus.OK)
+        
+        
 
