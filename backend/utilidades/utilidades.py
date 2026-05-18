@@ -2,7 +2,7 @@
 from django.core.paginator import Paginator
 
 # Dividir la informacion:
-def paginar(request, queryset, limite=10):
+def paginar(request, queryset, limite=9):
 
     page = request.GET.get("page", 1)
 

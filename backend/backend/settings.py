@@ -29,6 +29,10 @@ DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 
+CORS_ALLOWED_ORIGINS = [
+    os.getenv("BASE_URL_FRONTEND")
+]
+
 
 # Application definition
 
@@ -43,10 +47,12 @@ INSTALLED_APPS = [
     'categorias',
     'libros',
     'seguridad',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

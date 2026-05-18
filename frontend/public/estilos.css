@@ -1,0 +1,277 @@
+/* =====================================================================================
+   BODY GLOBAL
+===================================================================================== */
+:global(body) {
+    background: #0b0f1a;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* =====================================================================================
+   PAGINACION
+===================================================================================== */
+
+.cyber-page-btn {
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(176, 38, 255, 0.25);
+
+    color: white;
+
+    min-width: 45px;
+
+    transition: 0.3s;
+}
+
+.cyber-page-btn:hover {
+
+    background: rgba(176, 38, 255, 0.2);
+
+    border-color: #b026ff;
+
+    color: white;
+
+}
+
+.cyber-page-btn.active {
+
+    background: #b026ff;
+
+    border-color: #b026ff;
+
+    box-shadow:
+        0 0 12px rgba(176, 38, 255, 0.4);
+
+}
+
+.cyber-page-btn:disabled {
+
+    opacity: 0.4;
+
+    cursor: not-allowed;
+
+}
+
+/* =====================================================================================
+   NAVBAR CYBER
+===================================================================================== */
+.cyber-navbar {
+    background: #1f232a;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+}
+
+/* LINKS */
+.nav-link {
+    color: rgba(255,255,255,0.85) !important;
+    transition: 0.3s;
+    font-size: 0.95rem;
+}
+
+.nav-link:hover {
+    color: rgba(30, 90, 200, 0.85) !important;
+    text-shadow: 0 0 8px rgba(176, 38, 255, 0.45);
+}
+
+/* LINK ACTIVO */
+.router-link-active {
+    color: #fff !important;
+}
+
+/* TOGGLER */
+.navbar-toggler {
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* =====================================================================================
+   HERO / PORTADA
+===================================================================================== */
+.cyber-hero {
+    position: relative;
+
+    /* tamaño compacto */
+    min-height: 45vh;
+    max-height: 500px;
+
+    display: flex;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* efecto tarjeta */
+    width: calc(100% - 40px);
+    margin: 20px auto;
+
+    border-radius: 18px;
+    overflow: hidden;
+
+    background-color: transparent !important;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* OVERLAY */
+.cyber-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        135deg,
+        rgba(11, 15, 26, 0.88),
+        rgba(11, 15, 26, 0.55),
+        rgba(176, 38, 255, 0.18)
+    );
+
+    z-index: 1;
+}
+
+/* GLOW */
+.cyber-hero::after {
+    content: "";
+    position: absolute;
+
+    width: 70%;
+    height: 70%;
+
+    top: -30%;
+    left: -30%;
+
+    background: radial-gradient(
+        circle,
+        rgba(30, 90, 200, 0.25),
+        transparent 60%
+    );
+
+    filter: blur(60px);
+
+    z-index: 1;
+}
+
+/* CONTENIDO HERO */
+.breadcumb-text {
+    position: relative;
+    z-index: 2;
+}
+
+/* =====================================================================================
+   SECCIÓN LIBROS
+===================================================================================== */
+.cyber-section {
+    background: #0b0f1a;
+    padding: 60px 0;
+}
+
+/* =====================================================================================
+   CARDS LIBROS
+===================================================================================== */
+.cyber-book {
+    position: relative;
+
+    background: #121a2a;
+
+    border-radius: 12px;
+    overflow: hidden;
+
+    border: 1px solid rgba(128, 0, 128, 0.25);
+
+    transition: all 0.3s ease;
+}
+
+/* HOVER */
+.cyber-book:hover {
+    transform: translateY(-6px) scale(1.02);
+
+    border-color: #b026ff;
+
+    box-shadow:
+        0 0 12px rgba(176, 38, 255, 0.45),
+        0 0 28px rgba(176, 38, 255, 0.2);
+}
+
+/* EFECTO SCAN */
+.cyber-book::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(176, 38, 255, 0.18),
+        transparent
+    );
+
+    transition: 0.6s;
+}
+
+.cyber-book:hover::after {
+    left: 120%;
+}
+
+/* =====================================================================================
+   IMÁGENES
+===================================================================================== */
+.foto-mini {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* =====================================================================================
+   TEXTO CARDS
+===================================================================================== */
+.receipe-content h5 {
+    transition: 0.3s;
+}
+
+.cyber-book:hover .receipe-content h5 {
+    color: #b026ff !important;
+}
+
+/* =====================================================================================
+   RESPONSIVE
+===================================================================================== */
+@media (max-width: 768px) {
+
+    /* NAVBAR */
+    .navbar-nav {
+        padding-top: 10px;
+        gap: 10px;
+    }
+
+    /* HERO */
+    .cyber-hero {
+        min-height: 35vh;
+
+        width: calc(100% - 20px);
+
+        margin: 10px auto;
+
+        border-radius: 14px;
+    }
+
+    /* IMÁGENES */
+    .foto-mini {
+        height: 150px;
+    }
+
+    /* CARDS */
+    .cyber-book {
+        margin-bottom: 15px;
+    }
+
+    .receipe-content {
+        padding: 12px;
+    }
+}
+

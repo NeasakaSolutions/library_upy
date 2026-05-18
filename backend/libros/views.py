@@ -26,7 +26,7 @@ class LibrosLista(APIView):
 
         data = Libro.objects.order_by("-id")
 
-        paginado = paginar(request, data, 10)
+        paginado = paginar(request, data, 9)
 
         datos_json = LibroSerializer(
             paginado["data"],
