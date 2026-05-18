@@ -12,9 +12,7 @@
             <!-- REDES -->
             <div class="col-12 text-center">
 
-                <h6 class="footer-title">
-                    Redes Sociales
-                </h6>
+                
 
                 <div class="social-icons">
 
@@ -62,7 +60,7 @@
     border-top: 1px solid rgba(176, 38, 255, 0.15);
     border-radius: 2px;
 
-    padding: 40px 0 20px;
+    padding: 10px 0 10px;
 
     margin-top: 40px;
 

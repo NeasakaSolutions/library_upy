@@ -50,7 +50,7 @@ onMounted(async() => {
             <div class="row g-4 mobile-spacing">
 
                 <div v-for = "(libro, index) in libros.data" :key = "index" class="col-12 col-md-6 col-lg-4">
-                    <router-link :to = "{name: 'librosDetalle', params:{slug: libro.slug}}">
+                    <router-link :to = "{name: 'librosDetalle', params:{id: libro.id, slug: libro.slug}}">
                         <div class="cyber-book h-100">
                             <img :src="libro.imagen" class="foto-mini w-100" :alt="libro.nombre">
                             <div class="receipe-content p-3">
