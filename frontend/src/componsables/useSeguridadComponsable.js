@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/stores/authStore";
 import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -10,7 +11,9 @@ export function loginComposable(body){
                 'content-type': "application/json"
             }
         }).then((response) => {
-            alert("Inicio de sesion correcto")
+            const store = useAuthStore();
+            store.iniciarSesion(response.data);
+            window.location="/panel";
         })
         .catch((err) =>  {
             alert("Error al iniciar sesion");
