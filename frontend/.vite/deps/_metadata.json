@@ -1,0 +1,36 @@
+{
+  "hash": "b1facba8",
+  "configHash": "c56e853b",
+  "lockfileHash": "7bb7da44",
+  "browserHash": "deda2188",
+  "optimized": {
+    "pinia": {
+      "src": "../../node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "cf952dd1",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.js",
+      "file": "vue-router.js",
+      "fileHash": "47b14be2",
+      "needsInterop": false
+    },
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "8194f499",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "dist--6mgHHvk": {
+      "file": "dist--6mgHHvk.js",
+      "isDynamicEntry": false
+    },
+    "vue.runtime.esm-bundler-C6sZGmPl": {
+      "file": "vue.runtime.esm-bundler-C6sZGmPl.js",
+      "isDynamicEntry": false
+    }
+  }
+}

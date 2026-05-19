@@ -1,5 +1,6 @@
 import Error404 from '@/views/Error404.vue'
 import Libros from '@/views/Libros.vue'
+import LibrosBuscador from '@/views/LibrosBuscador.vue'
 import LibrosDetalle from '@/views/LibrosDetalle.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -20,6 +21,10 @@ const router = createRouter({
       path: '/libros',
       component: Libros,
       name: 'libros'
+    },
+    {
+      path: '/libros/buscador',
+      component: LibrosBuscador,
     },
     {
       path: '/:pathMatch(.*)*',

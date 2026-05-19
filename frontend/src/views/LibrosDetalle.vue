@@ -3,10 +3,20 @@ import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
 import { useRoute } from 'vue-router';
 import { libroComposable } from '@/componsables/libroComponsable';
+import { watchEffect } from 'vue';
 
 const route = useRoute();
 
 const {datos: libro, error: error} = libroComposable(route.params.id, route.params.slug);
+
+// Manejo de errores:
+watchEffect(() => {
+
+    if(error.value){
+        //console.log("Error con la api: " + error.value)
+        window.location = '/error'
+    }
+});
 
 </script>
 
@@ -30,13 +40,6 @@ const {datos: libro, error: error} = libroComposable(route.params.id, route.para
 
                 <div class="breadcumb-text text-center text-white">
 
-                    <h2 class="hero-title">
-                        Introducción a Ciberseguridad
-                    </h2>
-
-                    <p class="hero-subtitle">
-                        Recursos académicos y documentación especializada.
-                    </p>
 
                 </div>
 
@@ -132,6 +135,8 @@ const {datos: libro, error: error} = libroComposable(route.params.id, route.para
 </template>
 
 <style scoped>
+
+
 
 /* =====================================================================================
    HERO

@@ -8,6 +8,108 @@
 }
 
 /* =====================================================================================
+   BUSCADOR
+===================================================================================== */
+
+.search-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+/* INPUTS Y SELECT */
+.search-input {
+
+    width: 180px;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    background: rgba(255,255,255,0.06);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 0.9rem;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+/* SELECT */
+select.search-input {
+
+    appearance: none;
+
+    cursor: pointer;
+}
+
+/* OPTIONS */
+select.search-input option {
+
+    background: #121a2a;
+
+    color: white;
+}
+
+/* PLACEHOLDER */
+.search-input::placeholder {
+
+    color: rgba(255,255,255,0.45);
+}
+
+/* FOCUS */
+.search-input:focus {
+
+    border-color: rgba(176, 38, 255, 0.45);
+
+    box-shadow:
+        0 0 10px rgba(176, 38, 255, 0.18);
+}
+
+/* BOTON */
+.search-btn {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: 1px solid rgba(176, 38, 255, 0.35);
+
+    border-radius: 10px;
+
+    background: rgba(176, 38, 255, 0.12);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+
+    background: #b026ff;
+
+    box-shadow:
+        0 0 12px rgba(176, 38, 255, 0.25);
+}
+
+/* =====================================================================================
    PAGINACION
 ===================================================================================== */
 
@@ -57,6 +159,12 @@
    NAVBAR CYBER
 ===================================================================================== */
 .cyber-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+
     background: #1f232a;
     border-bottom: 1px solid rgba(255,255,255,0.06);
     border-radius: 2px;

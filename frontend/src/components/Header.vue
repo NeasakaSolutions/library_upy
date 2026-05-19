@@ -1,4 +1,30 @@
 <script setup>
+import { librosComposable } from '@/componsables/librosComponsable';
+import { watchEffect, ref } from 'vue';
+import { Form, Field } from 'vee-validate';
+
+
+const { datos: libros, error, categorias, getDatos} = librosComposable();
+
+// Manejo de errores:
+watchEffect(() => {
+
+    if(error.value){
+        //console.log("Error con la api: " + error.value)
+        window.location = '/error'
+    }
+});
+
+const categoria_id = ref("0");
+const search = ref("");
+
+let enviar = () => {
+
+    window.location =
+    `/libros/buscador?categoria_id=${categoria_id.value}&search=${search.value}`;
+
+};
+
 </script>
 
 <template>
@@ -42,17 +68,51 @@
                 </ul>
 
                 <!-- BUSCADOR -->
-                <form class="d-flex me-lg-3 my-2 my-lg-0 search-box">
-                    <input
-                        class="form-control search-input"
+                <Form
+                    @submit="enviar"
+                    class="search-box"
+                >
+
+                    <!-- SELECT -->
+                    <Field
+                        as="select"
+                        v-model="categoria_id"
+                        class="search-input"
+                        name="categoria">
+
+                        <option disabled selected value="0">
+                            Buscar categoría...
+                        </option>
+
+                        <option
+                            v-for="(categoria, i) in categorias?.data"
+                            :key="i"
+                            :value="categoria.id">
+
+                            {{ categoria.nombre }}
+                        </option>
+
+                    </Field>
+
+                    <!-- INPUT -->
+                    <Field
+                        class="search-input"
+                        v-model="search"
                         type="search"
-                        placeholder="Buscar recursos..."
-                        aria-label="Search"
-                    />
-                    <button class="btn btn-outline-light ms-2" type="submit">
+                        name="buscar"
+                        placeholder="Buscar libro..."/>
+
+                    <!-- BOTON -->
+                    <button
+                        class="search-btn"
+                        type="submit">
+
                         <i class="fa fa-search"></i>
+
                     </button>
-                </form>
+
+                </Form>
+                
 
             </div>
 
@@ -64,6 +124,24 @@
 </template>
 
 <style scoped>
+/* OPTION DEFAULT */
+select.search-input option {
 
+    background: #121a2a;
 
+    color: white;
+}
+
+/* TEXTO DEL SELECT */
+select.search-input {
+
+    color: rgba(255,255,255,0.45);
+
+    background: rgba(255,255,255,0.06);
+}
+
+select.search-input:invalid {
+
+    color: rgba(255,255,255,0.55);
+}
 </style>

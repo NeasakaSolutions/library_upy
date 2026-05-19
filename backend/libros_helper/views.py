@@ -10,6 +10,7 @@ from django.utils.dateformat import DateFormat
 from django.core.files.storage import FileSystemStorage
 from seguridad.decorators import logueado
 from utilidades.utilidades import paginar
+from django.db.models import Q
 from django.contrib.auth.models import User
 from libros.serializers import LibroSerializer
 from libros.models import Libro
@@ -203,7 +204,7 @@ class LibroHelperSlug(APIView):
 class LibroHelperHome(APIView):
 
     def get(self, request):
-        libro = Libro.objects.order_by("?").all()[:3] # SELECT * FROM libros ORDER BY rand()  LIMIT 3
+        libro = Libro.objects.order_by("?").all()[:6] # SELECT * FROM libros ORDER BY rand()  LIMIT 3
         datos_json = LibroSerializer(libro, many = True)
         return JsonResponse({
             "data": datos_json.data
@@ -217,16 +218,26 @@ class LibroHelperBuscador(APIView):
         categoria_id = request.GET.get("categoria_id")
         search = request.GET.get("search", "").strip()
 
-        if not categoria_id:
-            return JsonResponse({
-                "estado": "error",
-                "mensaje": "Categoria no valida"
-            }, status = HTTPStatus.BAD_REQUEST)
+        #if not categoria_id:
+        #    return JsonResponse({
+        #        "estado": "error",
+        #        "mensaje": "Categoria no valida"
+        #    }, status = HTTPStatus.BAD_REQUEST)
 
-        libro = Libro.objects.filter(
-            categoria_id = categoria_id,
-            slug__icontains = search
-        ).order_by("?")[:3]
+        libro = Libro.objects.all()
+
+        if categoria_id and categoria_id != "0":
+            libro = libro.filter(categoria_id=categoria_id)
+
+        libro = libro.filter(
+            Q(slug__icontains=search) |
+            Q(nombre__icontains=search)
+        )
+
+        #libro = Libro.objects.filter(
+         #   categoria_id = categoria_id,
+          #  slug__icontains = search
+        #).order_by("?")[:3]
 
         datos_json = LibroSerializer(libro, many = True)
 

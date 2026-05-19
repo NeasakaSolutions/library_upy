@@ -75,6 +75,7 @@ onMounted(async() => {
 :global(body) {
     background: #0b0f1a;
     margin: 0;
+    padding-top: 80px;
 }
 
 </style>
