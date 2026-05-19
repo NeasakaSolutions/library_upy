@@ -60,9 +60,9 @@ let enviar = () => {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <router-link class="nav-link" to="/login">
                             Iniciar sesión
-                        </a>
+                        </router-link>
                     </li>
 
                 </ul>
