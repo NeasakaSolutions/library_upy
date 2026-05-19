@@ -14,6 +14,21 @@ export const useAuthStore = defineStore('auth', {
             localStorage.setItem('libros_flaites_nombre', data.nombre);
             localStorage.setItem('libros_flaites_token', data.token);
         },
+        estasLogueado(){
+            if(this.authId == null){
+                window.location="/login";
+            }
+            this.authId = localStorage.getItem("libros_flaites_id");
+            this.authNombre = localStorage.getItem("libros_flaites_nombre");
+            this.authToken = localStorage.getItem("libros_flaites_token");
+        },
+        cerrarSesion(){
+            
+            if(window.confirm("Cerrar sesion...")){
+                localStorage.clear();
+                window.location = "/login";
+            }
+        },
     },
 });
 

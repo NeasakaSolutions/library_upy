@@ -2,8 +2,9 @@
 import { librosComposable } from '@/componsables/librosComponsable';
 import { watchEffect, ref } from 'vue';
 import { Form, Field } from 'vee-validate';
+import { useAuthStore } from '@/stores/authStore';
 
-
+const store = useAuthStore();
 const { datos: libros, error, categorias, getDatos} = librosComposable();
 
 // Manejo de errores:
@@ -59,9 +60,21 @@ let enviar = () => {
                         <router-link class="nav-link" to="/libros">Libros</router-link>
                     </li>
 
-                    <li class="nav-item">
+                    <li v-if="store.authId == null" class="nav-item">
                         <router-link class="nav-link" to="/login">
                             Iniciar sesión
+                        </router-link>
+                    </li>
+
+                    <li v-if="store.authId != null" class="nav-item">
+                        <router-link class="nav-link" to="/panel">
+                            {{ 'Bienvenido ' + store.authNombre }}
+                        </router-link>
+                    </li>
+
+                    <li v-if="store.authId != null" class="nav-item">
+                        <router-link @click = "store.cerrarSesion" class="nav-link" to="#">
+                            Cerrar sesión
                         </router-link>
                     </li>
 
