@@ -16,25 +16,14 @@
 
                 <div class="social-icons">
 
-                    <a href="#">
+                    <a href="https://www.facebook.com/upyucatanmx" target="_blank">
                         <i class="fab fa-facebook-f"></i>
                     </a>
 
-                    <a href="#">
+                    <a href="https://www.instagram.com/upyucatan/" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
 
-                    <a href="#">
-                        <i class="fab fa-x-twitter"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="fab fa-github"></i>
-                    </a>
 
                 </div>
 
