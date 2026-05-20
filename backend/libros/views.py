@@ -200,7 +200,7 @@ class LibroDetalle(APIView):
     
     # Modificar libro:
     @logueado()
-    def put(self, request, id):
+    def put(self, request, id, slug):
         
         # Validar que el libro a modificar exista:
         try:
@@ -275,7 +275,7 @@ class LibroDetalle(APIView):
         
     # Eliminar libro:
     @logueado()
-    def delete(self, request, id):
+    def delete(self, request, id, slug):
 
         try:
             libro = Libro.objects.get(id = id)
