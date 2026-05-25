@@ -185,8 +185,8 @@ class LibroDetalle(APIView):
                     "fecha": DateFormat(libro.fecha).format("d/m/Y"),
                     "categoria_id": libro.categoria_id,
                     "categoria": libro.categoria.nombre,
-                    "imagen": f"{os.getenv("BASE_URL")}uploads/fotos/{libro.foto}",
-                    "libro": f"{os.getenv("BASE_URL")}uploads/libros/{libro.libro}",
+                    "imagen": f"{os.getenv('BASE_URL')}uploads/fotos/{libro.foto}",
+                    "libro": f"{os.getenv('BASE_URL')}uploads/libros/{libro.libro}",
                     "user_id": libro.user_id,
                     "user": libro.user.first_name
                     }
