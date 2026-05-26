@@ -106,7 +106,7 @@ let enviar = () => {
                         <div class="d-grid text-center" v-if="preloader === 'block'">
 
                             <img
-                                src="/img/img/load.gif"
+                                src="/img/load.gif"
                                 class="mx-auto"
                                 width="70"
                                 alt="Cargando">

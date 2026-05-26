@@ -639,7 +639,7 @@ const eliminarCategoria = async (id) => {
                                 Guardar recurso
                             </button>
                             <div class="text-center" :style="'display:' + preloader">
-                                <img src="/img/img/load.gif" width="60">
+                                <img src="/img/load.gif" width="60">
                             </div>
                         </div>
 
