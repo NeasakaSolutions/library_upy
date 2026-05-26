@@ -639,7 +639,7 @@ const eliminarCategoria = async (id) => {
                                 Guardar recurso
                             </button>
                             <div class="text-center" :style="'display:' + preloader">
-                                <img src="/img/load.gif" width="60">
+                                <img src="/img/img/load.gif" width="60">
                             </div>
                         </div>
 
@@ -686,7 +686,7 @@ const eliminarCategoria = async (id) => {
                         </button>
                     </div>
                     <div class="text-center mt-2" :style="'display:' + preloader_categoria">
-                        <img src="/img/load.gif" width="40">
+                        <img src="/img/img/load.gif" width="40">
                     </div>
                 </div>
 
