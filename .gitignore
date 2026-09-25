@@ -3,6 +3,7 @@ venv/
 
 # Variables de entorno
 .env
+.venv
 
 # Base de datos
 db.sqlite3
