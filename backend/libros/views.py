@@ -1,5 +1,7 @@
 # Importaciones:
 import os
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
 from dotenv import load_dotenv
 from django.shortcuts import render
 from rest_framework.views import APIView
@@ -169,7 +171,8 @@ class LibrosLista(APIView):
 
 # Metodos con argumento:
 class LibroDetalle(APIView):
-    
+
+    @logueado()
     # Consultar un libro:
     def get(self, request, id, slug):
         
@@ -186,7 +189,8 @@ class LibroDetalle(APIView):
                     "categoria_id": libro.categoria_id,
                     "categoria": libro.categoria.nombre,
                     "imagen": f"{os.getenv('BASE_URL')}uploads/fotos/{libro.foto}",
-                    "libro": f"{os.getenv('BASE_URL')}uploads/libros/{libro.libro}",
+                    "libro": f"{os.getenv('BASE_URL')}api/v1/libros/{libro.id}/{libro.slug}/pdf/",
+                    #"libro": f"{os.getenv('BASE_URL')}uploads/libros/{libro.libro}",
                     "user_id": libro.user_id,
                     "user": libro.user.first_name
                     }
@@ -307,3 +311,36 @@ class LibroDetalle(APIView):
             "mensaje": "Registro eliminado correctamente"
         }, status=HTTPStatus.OK)
 
+class LeerLibroPDF(APIView):
+
+    @logueado()
+    def get(self, request, id, slug):
+
+        libro = get_object_or_404(Libro, id=id)
+
+        # Obtener la ruta del archivo PDF
+        ruta_pdf = os.path.join(
+            settings.BASE_DIR,
+            "uploads",
+            "libros",
+            str(libro.libro)
+        )
+
+        # Comprobar que el archivo exista
+        if not os.path.isfile(ruta_pdf):
+            return JsonResponse({
+                "estado": "error",
+                "mensaje": "El archivo PDF no existe"
+            }, status=HTTPStatus.NOT_FOUND)
+
+        # Entregar el PDF al usuario autenticado
+        respuesta = FileResponse(
+            open(ruta_pdf, "rb"),
+            content_type="application/pdf"
+        )
+
+        respuesta["Content-Disposition"] = (
+            f'inline; filename="{os.path.basename(ruta_pdf)}"'
+        )
+
+        return respuesta

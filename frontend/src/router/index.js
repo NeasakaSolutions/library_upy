@@ -4,6 +4,7 @@ import Libros from '@/views/Libros.vue'
 import LibrosBuscador from '@/views/LibrosBuscador.vue'
 import LibrosDetalle from '@/views/LibrosDetalle.vue'
 import Login from '@/views/Login.vue'
+import Registro from '@/views/Registro.vue'
 import Panel from '@/views/Panel.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/login',
       component: Login,
       name: 'login'
+    },
+    {
+      path: '/registro',
+      component: Registro,
+      name: 'registro'
     },
     {
       path: '/panel',

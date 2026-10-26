@@ -10,6 +10,10 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         iniciarSesion(data){
+            this.authId = data.id;
+            this.authNombre = data.nombre;
+            this.authToken = data.token;
+
             localStorage.setItem('libros_flaites_id', data.id);
             localStorage.setItem('libros_flaites_nombre', data.nombre);
             localStorage.setItem('libros_flaites_token', data.token);

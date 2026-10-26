@@ -1,15 +1,98 @@
 <script setup>
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
-import { useRoute } from 'vue-router';
-import { libroComposable } from '@/componsables/libroComponsable';
-import { watchEffect } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+//import { libroComposable } from '@/componsables/libroComponsable';
+import { useAuthStore } from '@/stores/authStore';
+import { watchEffect, onMounted, ref } from 'vue';
+import axios from 'axios';
+import { defineStore } from 'pinia';
 
+// Constantes:
 const route = useRoute();
+const router = useRouter();
+const store = useAuthStore();
+console.log("Token en Pinia:", store.authToken);
+console.log(
+    "Token en localStorage:",
+    localStorage.getItem("libros_flaites_token")
+);
+console.log("ID del libro:", route.params.id);
+console.log("Slug del libro:", route.params.slug);
+const API_URL = import.meta.env.VITE_API_URL;
+const error = ref(null);
+const cargando = ref(true);
+const libro = ref({
+    data: null
+});
 
-const {datos: libro, error: error} = libroComposable(route.params.id, route.params.slug);
+const leerLibro = async () => {
+    // Comprobacion del token:
+    if(!store.authToken){
+        router.replace('/login');
+        return;
+    }
+
+    try {
+        const respuesta = await axios.get(
+            `${API_URL}libros/${route.params.id}/${route.params.slug}`,{
+                headers: {
+                    Authorization: `Bearer ${store.authToken}`,
+                },
+            }
+        );
+        
+        // Datos del libro:
+        libro.value.data = respuesta.data.data;
+        console.log("Datos del libro: ", libro.value.data); // DEBUGIN
+    } catch (e) {
+        if(e.response?.status === 401 || e.response?.status === 403){
+            router.replace('/login');
+            return;
+        }
+
+        error.value = e;
+        router.replace('/error');
+    } finally {
+        cargando.value = false;
+    }
+};
+
+onMounted(leerLibro)
+
+// Abrir pdf:
+const abrirPDF = async () => {
+    try {
+        const respuesta = await axios.get(
+            `${API_URL}libros/${route.params.id}/${route.params.slug}/pdf/`,
+            {
+                headers: {
+                    Authorization: `Bearer ${store.authToken}`,
+                },
+
+                responseType: 'blob',
+            }
+        );
+
+        const url = URL.createObjectURL(respuesta.data);
+        window.open(url, "_blank");
+
+        // Liberar recursos:
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch (e) {
+        if(e.response?.status === 401 || e.response?.status === 403){
+            router.replace('/login');
+            return;
+        }
+
+        alert("No se pudo abrir el archivo.");
+    }
+};
+
+//const {datos: libro, error: error} = libroComposable(route.params.id, route.params.slug);
 
 // Manejo de errores:
+/*
 watchEffect(() => {
 
     if(error.value){
@@ -17,6 +100,7 @@ watchEffect(() => {
         window.location = '/error'
     }
 });
+*/
 
 </script>
 
@@ -111,11 +195,16 @@ watchEffect(() => {
 
                         <!--RECURSO EN PDF-->
                         <div class="resource-description">
+                            <button type = "button" class = "btn btn-primary" @click="abrirPDF">
+                                Leer libro
+                            </button>
+                            <!--
                             <a :href="libro.data.libro" target="_blank">
                                 <h6 class="resource-description" style="color: #fff;">
                                     Link para leer el libro: {{ libro.data.nombre }}
                                 </h6>
                             </a>
+                            -->
                         </div>
 
                     </div>

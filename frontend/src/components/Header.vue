@@ -60,6 +60,10 @@ let enviar = () => {
                         <router-link class="nav-link" to="/libros">Libros</router-link>
                     </li>
 
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/registro">Registrarse</router-link>
+                    </li>
+
                     <li v-if="store.authId == null" class="nav-item">
                         <router-link class="nav-link" to="/login">
                             Iniciar sesión

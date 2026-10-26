@@ -7,6 +7,12 @@ export const loginSchema = yup.object({
     password:  yup.string().required("El campo password es obligatorio")
 });
 
+export const registroSchema = yup.object({
+    nombre: yup.string().required("El campo nombre es obligatorio"),
+    correo: yup.string().required("El campo correo es obligatorio").email("El correo ingresado no es valido"),
+    password: yup.string().required("El campo password es obligatorio")
+});
+
 
 export const librosSchema = yup.object({
 
