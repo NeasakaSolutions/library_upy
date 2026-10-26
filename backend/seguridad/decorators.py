@@ -1,14 +1,10 @@
 # Importaciones
+import time
 from django.conf import settings
 from django.http.response import JsonResponse
-
 from functools import wraps
-
 from http import HTTPStatus
-
 from jose import jwt
-
-import time
 
 
 def logueado():
